@@ -1,54 +1,85 @@
+// src/app/[locale]/layout.tsx
+import "../globals.css";
+import "devicon/devicon.min.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/Theme-Provider";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 import { NextIntlClientProvider } from "next-intl";
 import {
   getMessages,
   getTranslations,
   setRequestLocale,
 } from "next-intl/server";
-import { routing, isValidLocale } from "@/i18n/routing";
+// FIX 1: Removed unused 'routing' import
+import { isValidLocale } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import React from "react";
-import { Metadata } from "next";
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
+const inter = Inter({ subsets: ["latin"] });
 
-// UPDATED: The 'params' prop is now correctly typed as a Promise here too.
+// This metadata function receives resolved params, so its signature is correct.
 export async function generateMetadata({
-  params,
+  params: { locale },
 }: {
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 }): Promise<Metadata> {
-  // Await the promise to get the locale.
-  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "HomePageSEO" });
   const fullName = process.env.NEXT_PUBLIC_FULL_NAME || "Portfolio";
   const firstName = fullName.split(" ")[0];
 
+  const rootDomain = process.env.NEXT_PUBLIC_ROOT_DOMAIN || "";
   return {
     title: t("title", { name: firstName }),
     description: t("description", { name: firstName }),
+    alternates: {
+      canonical: `https://${rootDomain}`,
+      languages: {
+        en: `https://${rootDomain}`,
+        de: `https://${rootDomain}/de`,
+        "x-default": `https://${rootDomain}`,
+      },
+    },
   };
 }
 
-type Props = {
+// FIX 2: The layout component's props are reverted to their original structure,
+// accepting 'params' as a Promise.
+export default async function RootLocaleLayout({
+  children,
+  params, // Kept as a Promise
+}: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-};
-
-export default async function LocaleLayout({ children, params }: Props) {
+  params: Promise<{ locale: string }>; // This is the correct type
+}>) {
+  // Await the promise to get the locale
   const { locale } = await params;
 
   if (!isValidLocale(locale)) {
     notFound();
   }
   setRequestLocale(locale);
-
   const messages = await getMessages();
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      {children}
-    </NextIntlClientProvider>
+    <html lang={locale} suppressHydrationWarning>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          inter.className
+        )}
+      >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        </ThemeProvider>
+        <Analytics />
+        <SpeedInsights />
+      </body>
+    </html>
   );
 }

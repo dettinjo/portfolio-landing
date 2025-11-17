@@ -1,11 +1,8 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a id="readme-top"></a>
 
-<!-- PROJECT SHIELDS -->
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
-<!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://joeldettinger.de">
@@ -28,7 +25,6 @@
   </p>
 </div>
 
-<!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
   <ol>
@@ -51,20 +47,22 @@
   </ol>
 </details>
 
-<!-- ABOUT THE PROJECT -->
 ## About The Project
 
 [![Product Name Screen Shot][product-screenshot]](https://joeldettinger.de)
 
 This repository contains the central landing page for my personal portfolio. It serves as a simple, elegant gateway, directing visitors to two specialized sub-sites: one for software development and another for photography.
 
+* **Software Portfolio Repo:** [github.com/dettinjo/portfolio-coding](https://github.com/dettinjo/portfolio-coding)
+* **Photography Portfolio Repo:** [github.com/dettinjo/portfolio-photography](https://github.com/dettinjo/portfolio-photography)
+
 This "hub-and-spoke" architecture provides a clean separation of concerns while maintaining a cohesive brand identity.
 
 Key Features of this repository:
-*   **Minimalist Gateway:** A clean, focused landing page with direct links to the main portfolio sections.
-*   **Internationalization:** Full support for English and German (EN/DE) with locale detection.
-*   **Dynamic Theming:** A light/dark mode that respects user system preferences.
-*   **Utility Pages:** Includes standalone, statically generated pages for Imprint and Privacy Policy.
+* **Minimalist Gateway:** A clean, focused landing page with direct links to the main portfolio sections.
+* **Internationalization:** Full support for English and German (EN/DE) with locale detection.
+* **Dynamic Theming:** A light/dark mode that respects user system preferences.
+* **Utility Pages:** Includes standalone, statically generated pages for Imprint and Privacy Policy.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -80,7 +78,6 @@ This project leverages a modern, fast, and developer-friendly stack.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- GETTING STARTED -->
 ## Getting Started
 
 To get a local copy up and running, follow these simple steps.
@@ -88,8 +85,8 @@ To get a local copy up and running, follow these simple steps.
 ### Prerequisites
 
 Ensure you have the following software installed on your machine.
-*   [Node.js](https://nodejs.org/) (v18 or higher recommended)
-*   npm
+* [Node.js](https://nodejs.org/) (v18 or higher recommended)
+* npm
     ```sh
     npm install npm@latest -g
     ```
@@ -98,7 +95,7 @@ Ensure you have the following software installed on your machine.
 
 1.  Clone the repo
     ```sh
-    git clone https://github.com/your-username/portfolio-landing.git
+    git clone [https://github.com/dettinjo/portfolio_frontend.git](https://github.com/dettinjo/portfolio_frontend.git)
     ```
 2.  Install NPM packages
     ```sh
@@ -120,33 +117,29 @@ Ensure you have the following software installed on your machine.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- LICENSE -->
 ## License
 
 Distributed under the MIT License. See the `LICENSE` file for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- CONTACT -->
 ## Contact
 
-Project Link: [https://github.com/your-username/portfolio-landing](https://github.com/your-username/portfolio-landing)
+Project Link: [https://github.com/dettinjo/portfolio_frontend](https://github.com/dettinjo/portfolio_frontend)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
 This project was made possible by these incredible tools and libraries.
 
-*   [shadcn/ui](https://ui.shadcn.com/)
-*   [next-intl](https://next-intl.dev/)
-*   [Lucide React](https://lucide.dev/)
-*   [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
+* [shadcn/ui](https://ui.shadcn.com/)
+* [next-intl](https://next-intl.dev/)
+* [Lucide React](https://lucide.dev/)
+* [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- MARKDOWN LINKS & IMAGES -->
 [issues-shield]: https://img.shields.io/github/issues/dettinjo/portfolio_frontend.svg?style=for-the-badge
 [issues-url]: https://github.com/dettinjo/portfolio_frontend/issues
 [license-shield]: https://img.shields.io/github/license/dettinjo/portfolio_frontend.svg?style=for-the-badge
