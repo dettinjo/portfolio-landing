@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile
     container_name: portfolio-landing
     restart: always
+    expose:
+      - "3000"
     environment:
       - NEXT_PUBLIC_FULL_NAME=${NEXT_PUBLIC_FULL_NAME}
       - NEXT_PUBLIC_EMAIL_ADDRESS=${NEXT_PUBLIC_EMAIL_ADDRESS}
