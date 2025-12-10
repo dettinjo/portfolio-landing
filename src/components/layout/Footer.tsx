@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 import { Heart } from "lucide-react";
 
 export function Footer() {
@@ -18,18 +19,18 @@ export function Footer() {
         </div>
 
         <div className="flex items-center gap-4 text-sm text-muted-foreground">
-          <a
-            href={`https://${rootDomain}/imprint`}
+          <Link
+            href="/imprint"
             className="transition-colors hover:text-foreground"
           >
             {t("imprint")}
-          </a>
-          <a
-            href={`https://${rootDomain}/privacy_policy`}
+          </Link>
+          <Link
+            href="/privacy_policy"
             className="transition-colors hover:text-foreground"
           >
             {t("privacy")}
-          </a>
+          </Link>
         </div>
       </div>
     </footer>

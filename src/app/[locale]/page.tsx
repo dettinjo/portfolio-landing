@@ -62,6 +62,22 @@ export default async function HomePage() {
         </div>
       </main>
       <Footer />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "Portfolio",
+            url: `https://${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`,
+            potentialAction: {
+              "@type": "SearchAction",
+              target: `https://${process.env.NEXT_PUBLIC_ROOT_DOMAIN}/?q={search_term_string}`,
+              "query-input": "required name=search_term_string",
+            },
+          }),
+        }}
+      />
     </div>
   );
 }

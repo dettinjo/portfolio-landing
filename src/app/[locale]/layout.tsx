@@ -1,6 +1,6 @@
 // src/app/[locale]/layout.tsx
 import "../globals.css";
-import "devicon/devicon.min.css";
+// import "devicon/devicon.min.css"; // Removed unused css
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
@@ -14,10 +14,14 @@ import {
   getTranslations,
   setRequestLocale,
 } from "next-intl/server";
-// FIX 1: Removed unused 'routing' import
-import { isValidLocale } from "@/i18n/routing";
+import { isValidLocale, routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import React from "react";
+
+// NEW: Enable SSG by statically generating params for all locales
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 const inter = Inter({ subsets: ["latin"] });
 
