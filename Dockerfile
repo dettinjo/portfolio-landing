@@ -20,6 +20,19 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# ARGs for Next.js build time
+ARG NEXT_PUBLIC_FULL_NAME
+ARG NEXT_PUBLIC_EMAIL_ADDRESS
+ARG NEXT_PUBLIC_PHONE_NUMBER
+ARG NEXT_PUBLIC_STREET_ADDRESS
+ARG NEXT_PUBLIC_CITY_ADDRESS
+ARG NEXT_PUBLIC_GITHUB_USERNAME
+ARG NEXT_PUBLIC_LINKEDIN_USERNAME
+ARG NEXT_PUBLIC_INSTAGRAM_USERNAME
+ARG NEXT_PUBLIC_ROOT_DOMAIN
+ARG NEXT_PUBLIC_SOFTWARE_DOMAIN
+ARG NEXT_PUBLIC_PHOTOGRAPHY_DOMAIN
+
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
