@@ -20,12 +20,14 @@ services:
     expose:
       - "3000"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:3000"]
       interval: 10s
       timeout: 5s
       retries: 3
       start_period: 30s
     environment:
+      - HOSTNAME=0.0.0.0
+      - PORT=3000
       - NEXT_PUBLIC_FULL_NAME=${NEXT_PUBLIC_FULL_NAME}
       - NEXT_PUBLIC_EMAIL_ADDRESS=${NEXT_PUBLIC_EMAIL_ADDRESS}
       - NEXT_PUBLIC_PHONE_NUMBER=${NEXT_PUBLIC_PHONE_NUMBER}
