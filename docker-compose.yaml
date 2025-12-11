@@ -17,8 +17,8 @@ services:
         NEXT_PUBLIC_PHOTOGRAPHY_DOMAIN: ${NEXT_PUBLIC_PHOTOGRAPHY_DOMAIN}
     image: my-portfolio-landing
     restart: unless-stopped
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/en"]
       interval: 30s
