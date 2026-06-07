@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/Theme-Provider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Script from "next/script";
 
 import { NextIntlClientProvider } from "next-intl";
 import {
@@ -68,6 +69,8 @@ export default async function RootLocaleLayout({
   setRequestLocale(locale);
   const messages = await getMessages();
 
+  const umamiWebsiteId = process.env.UMAMI_WEBSITE_ID;
+
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
@@ -83,6 +86,13 @@ export default async function RootLocaleLayout({
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />
+        {umamiWebsiteId && (
+          <Script
+            src="/api/sys-client"
+            data-website-id={umamiWebsiteId}
+            strategy="afterInteractive"
+          />
+        )}
       </body>
     </html>
   );
