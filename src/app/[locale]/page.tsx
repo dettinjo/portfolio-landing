@@ -44,6 +44,7 @@ export default async function HomePage() {
               href={`https://${softwareDomain}`}
               className={linkClassName}
               prefetch={false}
+              data-umami-event="software_link_clicked"
             >
               <Terminal className="h-28 w-28" />
               <span className="text-3xl font-semibold">{t("code")}</span>
@@ -54,6 +55,7 @@ export default async function HomePage() {
               href={`https://${photographyDomain}`}
               className={linkClassName}
               prefetch={false}
+              data-umami-event="photography_link_clicked"
             >
               <Camera className="h-28 w-28" />
               <span className="text-3xl font-semibold">{t("photos")}</span>
