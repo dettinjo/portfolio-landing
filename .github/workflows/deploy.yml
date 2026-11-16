@@ -3,6 +3,7 @@ name: Build & Deploy
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -45,18 +46,15 @@ jobs:
             NEXT_PUBLIC_SOFTWARE_DOMAIN=${{ secrets.NEXT_PUBLIC_SOFTWARE_DOMAIN || 'codeby.joeldettinger.de' }}
             NEXT_PUBLIC_PHOTOGRAPHY_DOMAIN=${{ secrets.NEXT_PUBLIC_PHOTOGRAPHY_DOMAIN || 'photosby.joeldettinger.de' }}
 
-      - name: Deploy to server via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: 91.98.81.231
-          username: root
-          key: ${{ secrets.DEPLOY_SSH_KEY }}
-          known_hosts: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
-          envs: COOLIFY_TOKEN
-          script: |
-            docker pull ghcr.io/dettinjo/portfolio-landing:latest
-            curl -sf -X POST \
-              -H "Authorization: Bearer $COOLIFY_TOKEN" \
-              "http://localhost:8000/api/v1/deploy?uuid=k8sw4ok8kkgwwkkscsoow448&force=false"
+      - name: Deploy via Komodo (signed webhook → pull + redeploy stack "portfolio-landing")
         env:
-          COOLIFY_TOKEN: ${{ secrets.COOLIFY_TOKEN || '10|qKIZ8pZJC1tMxifwObaAhyFBsOkd87o9ttS2gOvLb17cfc5a' }}
+          SECRET: ${{ secrets.KOMODO_WEBHOOK_SECRET }}
+        run: |
+          body=$(printf '{"ref":"refs/heads/main","after":"%s","repository":{"full_name":"%s"}}' "$GITHUB_SHA" "$GITHUB_REPOSITORY")
+          sig="sha256=$(printf '%s' "$body" | openssl dgst -sha256 -hmac "$SECRET" | awk '{print $NF}')"
+          code=$(curl -s -o /tmp/resp -w '%{http_code}' --max-time 30 -X POST \
+            "https://hooks.joeldettinger.de/listener/github/stack/portfolio-landing/deploy" \
+            -H 'Content-Type: application/json' -H 'X-GitHub-Event: push' \
+            -H "X-Hub-Signature-256: $sig" --data "$body")
+          cat /tmp/resp; echo; echo "HTTP $code"
+          [ "$code" -lt 300 ]
